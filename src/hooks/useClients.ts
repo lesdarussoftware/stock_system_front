@@ -40,10 +40,10 @@ export function useClients() {
         page: number;
         offset: number;
         name?: string;
-    }>({ page: 1, offset: 50, name: undefined });
+    }>({ page: 1, offset: 50, name: '' });
     const [totalRows, setTotalRows] = useState<number>(0);
 
-    async function getClients(params: string | undefined) {
+    async function getClients(params?: string | undefined) {
         const { status, data } = await handleQuery({ url: `${CLIENT_URL}${params ? `${params}` : ''}` })
         if (status === STATUS_CODES.OK) {
             setClients(data[0]);

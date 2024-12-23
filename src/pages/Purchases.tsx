@@ -49,7 +49,7 @@ export function Purchases() {
 
     useEffect(() => {
         const { page, offset, from, to } = filter;
-        getPurchases(page, offset, from?.toString(), to?.toString());
+        getPurchases(`?page=${page}&offset=${offset}&from=${from?.toString()}&to=${to?.toString()}`);
     }, [filter]);
 
     useEffect(() => {

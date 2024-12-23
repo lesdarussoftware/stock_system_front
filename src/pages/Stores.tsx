@@ -34,7 +34,7 @@ export function Stores() {
 
     useEffect(() => {
         const { page, offset } = filter;
-        getStores(page, offset);
+        getStores(`?page=${page}&offset=${offset}`);
     }, [filter]);
 
     return (<>

@@ -34,7 +34,7 @@ export function Suppliers() {
 
     useEffect(() => {
         const { page, offset } = filter;
-        getSuppliers(page, offset);
+        getSuppliers(`?page=${page}&offset=${offset}`);
     }, [filter]);
 
     return (

@@ -30,7 +30,7 @@ export function Users() {
 
     useEffect(() => {
         const { page, offset } = filter;
-        getUsers(page, offset);
+        getUsers(`?page=${page}&offset=${offset}`);
     }, [filter]);
 
     return (

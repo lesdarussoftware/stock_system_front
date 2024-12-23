@@ -34,7 +34,7 @@ export function Categories() {
 
     useEffect(() => {
         const { page, offset } = filter;
-        getCategories(page, offset);
+        getCategories(`?page=${page}&offset=${offset}`);
     }, [filter]);
 
     return (

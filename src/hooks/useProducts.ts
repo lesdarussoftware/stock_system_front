@@ -50,10 +50,10 @@ export function useProducts() {
         offset: number;
         name?: string;
         sku?: string;
-    }>({ page: 1, offset: 50, name: undefined, sku: undefined });
+    }>({ page: 1, offset: 50, name: '', sku: '' });
     const [totalRows, setTotalRows] = useState<number>(0);
 
-    async function getProducts(params: string | undefined) {
+    async function getProducts(params?: string | undefined) {
         const { status, data } = await handleQuery({ url: `${PRODUCT_URL}${params ? `${params}` : ''}` })
         if (status === STATUS_CODES.OK) {
             setProducts(data[0]);

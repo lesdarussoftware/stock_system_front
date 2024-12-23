@@ -32,7 +32,7 @@ export function useUsers() {
     const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
-    async function getUsers(params: string | undefined) {
+    async function getUsers(params?: string | undefined) {
         const { status, data } = await handleQuery({ url: `${USER_URL}${params ? `${params}` : ''}` })
         if (status === STATUS_CODES.OK) {
             setUsers(data[0]);

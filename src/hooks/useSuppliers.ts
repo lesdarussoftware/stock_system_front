@@ -39,7 +39,7 @@ export function useSuppliers() {
     const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
-    async function getSuppliers(params: string | undefined) {
+    async function getSuppliers(params?: string | undefined) {
         const { status, data } = await handleQuery({ url: `${SUPPLIER_URL}${params ? `${params}` : ''}` })
         if (status === STATUS_CODES.OK) {
             setSuppliers(data[0]);

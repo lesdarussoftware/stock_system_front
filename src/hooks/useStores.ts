@@ -39,7 +39,7 @@ export function useStores() {
     const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
-    async function getStores(params: string | undefined) {
+    async function getStores(params?: string | undefined) {
         const { status, data } = await handleQuery({ url: `${STORE_URL}${params ? `${params}` : ''}` })
         if (status === STATUS_CODES.OK) {
             setStores(data[0]);

@@ -48,7 +48,7 @@ export function Products() {
 
     useEffect(() => {
         const { page, offset, name, sku } = filter;
-        getProducts(page, offset, name, sku);
+        getProducts(`?page=${page}&offset=${offset}&name=${name}&sku=${sku}`);
     }, [filter]);
 
     return (

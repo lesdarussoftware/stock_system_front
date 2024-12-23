@@ -14,23 +14,23 @@ import { Users } from './pages/Users'
 
 function App() {
   return (
-    <AuthProvider>
-      <MessageProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <MessageProvider>
           <Routes>
             <Route path='/' element={<LoginPage />} />
             <Route path='/productos' element={<Products />} />
-            <Route path='/clientos' element={<Clients />} />
+            <Route path='/clientes' element={<Clients />} />
             <Route path='/ventas' element={<Sales />} />
-            <Route path='/compreas' element={<Purchases />} />
+            <Route path='/compras' element={<Purchases />} />
             <Route path='/categorias' element={<Categories />} />
             <Route path='/proveedores' element={<Suppliers />} />
             <Route path='/depositos' element={<Stores />} />
             <Route path='/usuarios' element={<Users />} />
           </Routes>
-        </BrowserRouter>
-      </MessageProvider>
-    </AuthProvider>
+        </MessageProvider>
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 

@@ -49,7 +49,7 @@ export function Sales() {
 
     useEffect(() => {
         const { page, offset, from, to } = filter;
-        getSales(page, offset, from?.toString(), to?.toString());
+        getSales(`?page=${page}&offset=${offset}&from=${from?.toString()}&to=${to?.toString()}`);
     }, [filter]);
 
     useEffect(() => {

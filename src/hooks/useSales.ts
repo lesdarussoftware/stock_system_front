@@ -48,7 +48,7 @@ export function useSales() {
     const [items, setItems] = useState<any[]>([]);
     const [idsToDelete, setIdsToDelete] = useState<number[]>([]);
 
-    async function getSales(params: string | undefined) {
+    async function getSales(params?: string | undefined) {
         const { status, data } = await handleQuery({ url: `${SALE_ORDER_URL}${params ? `${params}` : ''}` })
         if (status === STATUS_CODES.OK) {
             setSales(data[0]);

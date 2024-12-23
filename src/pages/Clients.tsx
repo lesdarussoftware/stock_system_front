@@ -35,7 +35,7 @@ export function Clients() {
 
     useEffect(() => {
         const { page, offset, name } = filter;
-        getClients(page, offset, name);
+        getClients(`?page=${page}&offset=${offset}&name=${name}`);
     }, [filter]);
 
     return (

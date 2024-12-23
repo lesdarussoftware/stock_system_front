@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
+import { format } from "date-fns";
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -21,8 +22,11 @@ export function Layout({ children }: LayoutProps) {
     return (
         <div>
             <header>
-                <Navbar bg="primary">
-                    <Nav className="d-flex justify-content-end gap-3 w-100 px-3">
+                <Navbar bg="primary" className="d-flex justify-content-between px-3">
+                    <div className="text-white d-flex align-items-center w-25">
+                        Venc.: {auth?.me.deadline.split('T')[0].split('-').reverse().join('/')}
+                    </div>
+                    <Nav className="d-flex justify-content-end gap-3 w-75">
                         <Nav.Link className="text-white" onClick={() => navigate('/productos')}>Artículos</Nav.Link>
                         <Nav.Link className="text-white" onClick={() => navigate('/clientes')}>Clientes</Nav.Link>
                         <Nav.Link className="text-white" onClick={() => navigate('/ventas')}>Ventas</Nav.Link>
@@ -31,7 +35,6 @@ export function Layout({ children }: LayoutProps) {
                         <Nav.Link className="text-white" onClick={() => navigate('/proveedores')}>Proveedores</Nav.Link>
                         <Nav.Link className="text-white" onClick={() => navigate('/depositos')}>Depósitos</Nav.Link>
                         <Nav.Link className="text-white" onClick={() => navigate('/usuarios')}>Usuarios</Nav.Link>
-                        <Nav.Link className="text-white">Venc.: {auth?.me.deadline}</Nav.Link>
                         <Nav.Link className="text-white" onClick={handleLogout}>Salir</Nav.Link>
                     </Nav>
                 </Navbar>
