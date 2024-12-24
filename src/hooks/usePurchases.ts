@@ -61,7 +61,7 @@ export function usePurchases() {
             const { status, data } = await handleQuery({
                 url: showForm === 'NEW' ? BUY_ORDER_URL : showForm === 'EDIT' ? `${BUY_ORDER_URL}/${formData.id}` : '',
                 method: showForm === 'NEW' ? 'POST' : showForm === 'EDIT' ? 'PUT' : 'GET',
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ ...formData, buy_products: items, ids_to_delete: idsToDelete })
             })
             if (status === STATUS_CODES.CREATED) {
                 setPurchases([data, ...purchases]);

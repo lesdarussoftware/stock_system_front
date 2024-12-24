@@ -64,7 +64,7 @@ export function useSales() {
             const { status, data } = await handleQuery({
                 url: showForm === 'NEW' ? SALE_ORDER_URL : showForm === 'EDIT' ? `${SALE_ORDER_URL}/${formData.id}` : '',
                 method: showForm === 'NEW' ? 'POST' : showForm === 'EDIT' ? 'PUT' : 'GET',
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ ...formData, sale_products: items, ids_to_delete: idsToDelete })
             })
             if (status === STATUS_CODES.CREATED) {
                 setSales([data, ...sales]);
