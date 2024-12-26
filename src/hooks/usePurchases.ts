@@ -36,7 +36,7 @@ export function usePurchases() {
         from: number | string | string[] | undefined;
         to: number | string | string[] | undefined;
     }>({
-        page: 1,
+        page: 0,
         offset: 50,
         from: '',
         to: ''
@@ -82,7 +82,7 @@ export function usePurchases() {
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setHeaderMessage('Éxito');
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setOpenMessage(true)
         }
@@ -99,7 +99,7 @@ export function usePurchases() {
             setHeaderMessage('Éxito');
             setSeverity('SUCCESS')
             setBodyMessage('Compra eliminada correctamente.')
-            purchaseFormData.reset()
+            purchaseFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setHeaderMessage('Error');
@@ -112,7 +112,7 @@ export function usePurchases() {
     }
 
     function handleClose() {
-        purchaseFormData.reset();
+        purchaseFormData.reset(setShowForm);
         setShowForm(null);
         setItems([]);
         setIdsToDelete([]);

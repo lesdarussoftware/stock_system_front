@@ -69,7 +69,7 @@ export function SupplierForm({ supplierFormData, setShowForm, handleSubmit }: Su
             <div className='mt-5 d-flex justify-content-center gap-3'>
                 <Button variant="secondary" type="button" className='w-25' onClick={() => {
                     setShowForm(null);
-                    reset();
+                    reset(setShowForm);
                 }}>
                     Cancelar
                 </Button>

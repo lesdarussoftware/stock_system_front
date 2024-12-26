@@ -30,7 +30,7 @@ export function useSalePayments() {
 
     const [salePayments, setSalePayments] = useState<SalePayment[]>([]);
     const [showForm, setShowForm] = useState<ShowFormType>(null);
-    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
+    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function handleSubmit(e: any) {
@@ -61,7 +61,7 @@ export function useSalePayments() {
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setHeaderMessage('Éxito');
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setOpenMessage(true)
         }
@@ -78,7 +78,7 @@ export function useSalePayments() {
             setSeverity('SUCCESS')
             setHeaderMessage('Éxito');
             setBodyMessage('Pago eliminado correctamente.')
-            salePaymentFormData.reset()
+            salePaymentFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setHeaderMessage('Error');
@@ -91,7 +91,7 @@ export function useSalePayments() {
     }
 
     function handleClose() {
-        salePaymentFormData.reset();
+        salePaymentFormData.reset(setShowForm);
         setShowForm(null);
     }
 

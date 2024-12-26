@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { ShowFormType } from "../utils/types";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useForm({ defaultData, rules }: { defaultData: any, rules: any }) {
 
@@ -46,7 +48,8 @@ export function useForm({ defaultData, rules }: { defaultData: any, rules: any }
         return flag;
     }
 
-    function reset() {
+    function reset(setShowForm?: (arg0: ShowFormType) => void | undefined) {
+        if (setShowForm) setShowForm(null);
         setErrors(defaultData);
         setFormData(defaultData);
         setDisabled(false);

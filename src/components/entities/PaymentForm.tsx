@@ -72,7 +72,7 @@ export function PaymentForm({ paymentFormData, setShowForm, handleSubmit }: Paym
                 <Button variant="secondary" type="button" className='w-25' onClick={() => {
                     setShowForm(null);
                     setShowForm(null);
-                    reset();
+                    reset(setShowForm);
                 }}>
                     Cancelar
                 </Button>

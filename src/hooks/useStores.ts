@@ -36,7 +36,7 @@ export function useStores() {
     const [loadingStores, setLoadingStores] = useState<boolean>(true);
     const [stores, setStores] = useState<Store[]>([]);
     const [showForm, setShowForm] = useState<ShowFormType>(null);
-    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
+    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getStores(params?: string | undefined) {
@@ -74,7 +74,7 @@ export function useStores() {
             }
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setHeaderMessage(formData.name);
             setOpenMessage(true)
@@ -91,7 +91,7 @@ export function useStores() {
             setTotalRows(totalRows - 1)
             setSeverity('SUCCESS')
             setBodyMessage('Depósito eliminado correctamente.')
-            storeFormData.reset()
+            storeFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setBodyMessage(data.message)
@@ -104,7 +104,7 @@ export function useStores() {
     }
 
     function handleClose() {
-        storeFormData.reset();
+        storeFormData.reset(setShowForm);
         setShowForm(null);
     }
 

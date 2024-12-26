@@ -29,7 +29,7 @@ export function useUsers() {
     const [laodingUsers, setLoadingUsers] = useState<boolean>(true);
     const [users, setUsers] = useState<User[]>([]);
     const [showForm, setShowForm] = useState<ShowFormType>(null);
-    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
+    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getUsers(params?: string | undefined) {
@@ -55,7 +55,7 @@ export function useUsers() {
                 setTotalRows(totalRows + 1)
                 setBodyMessage('Usuario registrado correctamente.')
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             } else {
                 setBodyMessage(data.message)
                 setSeverity('ERROR')
@@ -67,7 +67,7 @@ export function useUsers() {
     }
 
     function handleClose() {
-        userFormData.reset();
+        userFormData.reset(setShowForm);
         setShowForm(null);
     }
 

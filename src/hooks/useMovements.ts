@@ -34,7 +34,7 @@ export function useMovements() {
     const [loadingMovements, setLoadingMovements] = useState<boolean>(true);
     const [movements, setMovements] = useState<Movement[]>([]);
     const [showForm, setShowForm] = useState<ShowFormType>(null);
-    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
+    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getMovements(params?: string | undefined) {
@@ -72,7 +72,7 @@ export function useMovements() {
             }
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setHeaderMessage(formData.type);
             setOpenMessage(true)
@@ -89,7 +89,7 @@ export function useMovements() {
             setTotalRows(totalRows - 1)
             setSeverity('SUCCESS')
             setBodyMessage('Movimiento eliminado correctamente.')
-            movementFormData.reset()
+            movementFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setBodyMessage(data.message)
@@ -102,7 +102,7 @@ export function useMovements() {
     }
 
     function handleClose() {
-        movementFormData.reset();
+        movementFormData.reset(setShowForm);
         setShowForm(null);
     }
 

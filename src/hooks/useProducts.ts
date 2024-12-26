@@ -50,7 +50,7 @@ export function useProducts() {
         offset: number;
         name?: string;
         sku?: string;
-    }>({ page: 1, offset: 50, name: '', sku: '' });
+    }>({ page: 0, offset: 50, name: '', sku: '' });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getProducts(params?: string | undefined) {
@@ -69,7 +69,12 @@ export function useProducts() {
             const { status, data } = await handleQuery({
                 url: showForm === 'NEW' ? PRODUCT_URL : showForm === 'EDIT' ? `${PRODUCT_URL}/${formData.id}` : '',
                 method: showForm === 'NEW' ? 'POST' : showForm === 'EDIT' ? 'PUT' : 'GET',
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    ...formData,
+                    supplier_id: +formData.supplier_id,
+                    category_id: +formData.category_id,
+                    store_id: formData.store_id ? +formData.store_id : undefined
+                })
             })
             if (status === STATUS_CODES.CREATED) {
                 setProducts([data, ...products]);
@@ -88,7 +93,7 @@ export function useProducts() {
             }
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setHeaderMessage(formData.name);
             setOpenMessage(true)
@@ -105,7 +110,7 @@ export function useProducts() {
             setTotalRows(totalRows - 1)
             setSeverity('SUCCESS')
             setBodyMessage('Producto eliminado correctamente.')
-            productFormData.reset()
+            productFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setBodyMessage(data.message)
@@ -118,7 +123,7 @@ export function useProducts() {
     }
 
     function handleClose() {
-        productFormData.reset();
+        productFormData.reset(setShowForm);
         setShowForm(null);
     }
 
@@ -164,17 +169,17 @@ export function useProducts() {
         {
             id: 'category',
             label: 'Categoría',
-            accessor: 'category'
+            accessor: (row: Product) => row.category?.name
         },
         {
             id: 'supplier',
             label: 'Proveedor',
-            accessor: 'supplier'
+            accessor: (row: Product) => row.supplier?.name
         },
         {
             id: 'store',
             label: 'Depósito',
-            accessor: 'store'
+            accessor: (row: Product) => row.store?.name
         },
         {
             id: 'is_active',

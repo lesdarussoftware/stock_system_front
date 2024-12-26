@@ -110,7 +110,7 @@ export function SaleForm({
                     setShowForm(null);
                     setItems([]);
                     setIdsToDelete([]);
-                    reset();
+                    reset(setShowForm);
                 }}>
                     {showForm === 'VIEW' ? 'Volver' : 'Cancelar'}
                 </Button>

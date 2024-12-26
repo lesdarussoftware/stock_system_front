@@ -39,7 +39,7 @@ export function useSales() {
         from: number | string | string[] | undefined;
         to: number | string | string[] | undefined;
     }>({
-        page: 1,
+        page: 0,
         offset: 50,
         from: '',
         to: ''
@@ -85,7 +85,7 @@ export function useSales() {
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setHeaderMessage('Éxito');
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setOpenMessage(true)
         }
@@ -102,7 +102,7 @@ export function useSales() {
             setHeaderMessage('Éxito');
             setSeverity('SUCCESS')
             setBodyMessage('Venta eliminada correctamente.')
-            saleFormData.reset()
+            saleFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setHeaderMessage('Error');
@@ -115,7 +115,7 @@ export function useSales() {
     }
 
     function handleClose() {
-        saleFormData.reset();
+        saleFormData.reset(setShowForm);
         setShowForm(null);
         setItems([]);
         setIdsToDelete([]);

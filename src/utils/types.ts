@@ -58,6 +58,9 @@ export interface Product {
     min_stock?: number;
     is_active: boolean;
     category_id: number;
+    category?: Category;
+    supplier?: Supplier;
+    store?: Store;
     supplier_id: number;
     store_id?: number;
     created_at: Date;

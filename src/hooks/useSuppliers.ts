@@ -36,7 +36,7 @@ export function useSuppliers() {
     const [loadingSuppliers, setLoadingSuppliers] = useState<boolean>(true);
     const [suppliers, setSuppliers] = useState<Supplier[]>([]);
     const [showForm, setShowForm] = useState<ShowFormType>(null);
-    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
+    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getSuppliers(params?: string | undefined) {
@@ -74,7 +74,7 @@ export function useSuppliers() {
             }
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setHeaderMessage(formData.name);
             setOpenMessage(true)
@@ -91,7 +91,7 @@ export function useSuppliers() {
             setTotalRows(totalRows - 1)
             setSeverity('SUCCESS')
             setBodyMessage('Proveedor eliminado correctamente.')
-            supplierFormData.reset()
+            supplierFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setBodyMessage(data.message)
@@ -104,7 +104,7 @@ export function useSuppliers() {
     }
 
     function handleClose() {
-        supplierFormData.reset();
+        supplierFormData.reset(setShowForm);
         setShowForm(null);
     }
 

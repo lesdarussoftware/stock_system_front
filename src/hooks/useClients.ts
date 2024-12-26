@@ -40,7 +40,7 @@ export function useClients() {
         page: number;
         offset: number;
         name?: string;
-    }>({ page: 1, offset: 50, name: '' });
+    }>({ page: 0, offset: 50, name: '' });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getClients(params?: string | undefined) {
@@ -78,7 +78,7 @@ export function useClients() {
             }
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setHeaderMessage(formData.name);
             setOpenMessage(true)
@@ -95,7 +95,7 @@ export function useClients() {
             setTotalRows(totalRows - 1)
             setSeverity('SUCCESS')
             setBodyMessage('Cliente eliminado correctamente.')
-            clientFormData.reset()
+            clientFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setBodyMessage(data.message)
@@ -108,7 +108,7 @@ export function useClients() {
     }
 
     function handleClose() {
-        clientFormData.reset();
+        clientFormData.reset(setShowForm);
         setShowForm(null);
     }
 

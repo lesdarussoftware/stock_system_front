@@ -74,7 +74,7 @@ export function TableComponent({
         setFilter({
             ...filter,
             offset: Number(event.target.value),
-            page: 1
+            page: 0
         });
     };
 
@@ -167,19 +167,19 @@ export function TableComponent({
                     </Form.Group>
                 </div>
                 <Pagination>
-                    <Pagination.First onClick={() => setFilter({ ...filter, page: 1 })} disabled={filter.page === 1} />
-                    <Pagination.Prev onClick={() => setFilter((p: any) => ({ ...p, page: Math.max(1, p - 1) }))} disabled={filter.page === 1} />
+                    <Pagination.First onClick={() => setFilter({ ...filter, page: 0 })} disabled={filter.page === 0} />
+                    <Pagination.Prev onClick={() => setFilter((p: any) => ({ ...p, page: Math.max(1, p - 1) }))} disabled={filter.page === 0} />
                     {[...Array(totalPages)].map((_, idx) => (
                         <Pagination.Item
                             key={idx + 1}
                             active={filter.page === idx + 1}
-                            onClick={() => setFilter({ ...filter, page: idx + 1 })}
+                            onClick={() => setFilter({ ...filter, page: idx })}
                         >
                             {idx + 1}
                         </Pagination.Item>
                     ))}
-                    <Pagination.Next onClick={() => setFilter((p: any) => ({ ...p, page: Math.min(totalPages, p + 1) }))} disabled={filter.page === totalPages} />
-                    <Pagination.Last onClick={() => setFilter({ ...filter, page: totalPages })} disabled={filter.page === totalPages} />
+                    <Pagination.Next onClick={() => setFilter((p: any) => ({ ...p, page: Math.min(totalPages, p + 1) }))} disabled={filter.page === totalPages - 1} />
+                    <Pagination.Last onClick={() => setFilter({ ...filter, page: totalPages })} disabled={filter.page === totalPages - 1} />
                 </Pagination>
             </div>
         </>

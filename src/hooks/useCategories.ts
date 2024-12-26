@@ -23,7 +23,7 @@ export function useCategories() {
     const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
     const [categories, setCategories] = useState<Category[]>([]);
     const [showForm, setShowForm] = useState<ShowFormType>(null);
-    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 1, offset: 50 });
+    const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
     async function getCategories(params?: string | undefined) {
@@ -61,7 +61,7 @@ export function useCategories() {
             }
             if (status === STATUS_CODES.CREATED || status === STATUS_CODES.OK) {
                 setSeverity('SUCCESS')
-                reset()
+                reset(setShowForm)
             }
             setHeaderMessage(formData.name);
             setOpenMessage(true)
@@ -78,7 +78,7 @@ export function useCategories() {
             setTotalRows(totalRows - 1)
             setSeverity('SUCCESS')
             setBodyMessage('Categoría eliminada correctamente.')
-            categoryFormData.reset()
+            categoryFormData.reset(setShowForm)
         }
         if (status === STATUS_CODES.SERVER_ERROR) {
             setBodyMessage(data.message)
@@ -91,7 +91,7 @@ export function useCategories() {
     }
 
     function handleClose() {
-        categoryFormData.reset();
+        categoryFormData.reset(setShowForm);
         setShowForm(null);
     }
 
