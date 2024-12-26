@@ -46,7 +46,6 @@ export function TableComponent({
 
     const totalPages = Math.ceil(totalRows / filter.offset);
 
-    // Efecto para ordenar las filas cada vez que cambia sortConfig
     useEffect(() => {
         if (!sortConfig) return;
 
@@ -81,79 +80,81 @@ export function TableComponent({
 
     return (
         <>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        {actions && <th />}
-                        {columns.map(col => (
-                            <th key={col.id} onClick={() => col.sortable && handleSort(col.id)}>
-                                {col.label}
-                                {col.sortable && (
-                                    <>
-                                        {sortConfig?.key === col.id ? (
-                                            sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽'
-                                        ) : ' ↕'}
-                                    </>
-                                )}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows.length === 0 ?
+            <div className="table-responsive">
+                <Table striped bordered hover>
+                    <thead>
                         <tr>
-                            <td colSpan={columns.length + (actions ? 1 : 0)} className='text-center'>
-                                No hay registros para mostrar.
-                            </td>
-                        </tr> :
-                        rows.map(row => (
-                            <tr key={row.id}>
-                                {actions &&
-                                    <td className='d-flex gap-2'>
-                                        {showViewAction &&
-                                            <button type="button" className="btn btn-info btn-sm text-white d-flex align-items-center" onClick={() => {
-                                                setFormData(row);
-                                                setShowForm('VIEW');
-                                            }}>
-                                                <ViewIcon />
-                                            </button>
-                                        }
-                                        {showEditAction &&
-                                            <button type="button" className="btn btn-warning btn-sm text-white d-flex align-items-center" onClick={() => {
-                                                setFormData(row);
-                                                setShowForm('EDIT');
-                                            }}>
-                                                <EditIcon />
-                                            </button>
-                                        }
-                                        {showDeleteAction &&
-                                            <button type="button" className="btn btn-danger btn-sm d-flex align-items-center" onClick={() => {
-                                                setFormData(row);
-                                                setShowForm('DELETE');
-                                            }}>
-                                                <DeleteIcon />
-                                            </button>
-                                        }
-                                        {showAdjustAction &&
-                                            <button type="button" className="btn btn-secondary btn-sm text-white d-flex align-items-center" onClick={() => {
-                                                setFormData(row);
-                                                setShowForm('ADJUST');
-                                            }}>
-                                                <AdjustIcon />
-                                            </button>
-                                        }
-                                    </td>
-                                }
-                                {columns.map(col => col.accessor).map((acc, idx) => (
-                                    <td key={idx}>
-                                        {typeof acc === 'function' ? acc(row) : row[acc]}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </Table>
+                            {actions && <th />}
+                            {columns.map(col => (
+                                <th key={col.id} onClick={() => col.sortable && handleSort(col.id)}>
+                                    {col.label}
+                                    {col.sortable && (
+                                        <>
+                                            {sortConfig?.key === col.id ? (
+                                                sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽'
+                                            ) : ' ↕'}
+                                        </>
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows.length === 0 ?
+                            <tr>
+                                <td colSpan={columns.length + (actions ? 1 : 0)} className='text-center'>
+                                    No hay registros para mostrar.
+                                </td>
+                            </tr> :
+                            rows.map(row => (
+                                <tr key={row.id}>
+                                    {actions &&
+                                        <td className='d-flex gap-2'>
+                                            {showViewAction &&
+                                                <button type="button" className="btn btn-info btn-sm text-white d-flex align-items-center" onClick={() => {
+                                                    setFormData(row);
+                                                    setShowForm('VIEW');
+                                                }}>
+                                                    <ViewIcon />
+                                                </button>
+                                            }
+                                            {showEditAction &&
+                                                <button type="button" className="btn btn-warning btn-sm text-white d-flex align-items-center" onClick={() => {
+                                                    setFormData(row);
+                                                    setShowForm('EDIT');
+                                                }}>
+                                                    <EditIcon />
+                                                </button>
+                                            }
+                                            {showDeleteAction &&
+                                                <button type="button" className="btn btn-danger btn-sm d-flex align-items-center" onClick={() => {
+                                                    setFormData(row);
+                                                    setShowForm('DELETE');
+                                                }}>
+                                                    <DeleteIcon />
+                                                </button>
+                                            }
+                                            {showAdjustAction &&
+                                                <button type="button" className="btn btn-secondary btn-sm text-white d-flex align-items-center" onClick={() => {
+                                                    setFormData(row);
+                                                    setShowForm('ADJUST');
+                                                }}>
+                                                    <AdjustIcon />
+                                                </button>
+                                            }
+                                        </td>
+                                    }
+                                    {columns.map(col => col.accessor).map((acc, idx) => (
+                                        <td key={idx}>
+                                            {typeof acc === 'function' ? acc(row) : row[acc]}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
+            </div>
             <div className='d-flex align-items-center justify-content-end gap-4'>
                 <div className="d-flex justify-content-between align-items-center mb-3">
                     <Form.Group controlId="rowsPerPageSelect" className='d-flex gap-2 align-items-center'>

@@ -85,7 +85,7 @@ export function Purchases() {
                             <BuyPaymentsList buyOrder={formData} setBuyOrderShowForm={setShowForm} /> :
                             <>
                                 <div className="d-flex justify-content-between align-items-center mb-2">
-                                    <div className="d-flex gap-3 align-items-center">
+                                    <div className="d-flex gap-3 align-items-center flex-column flex-sm-row">
                                         <h2>Compras</h2>
                                         <Form.Group controlId="from">
                                             <Form.Label className="mb-0">Desde</Form.Label>

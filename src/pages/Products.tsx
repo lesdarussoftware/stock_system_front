@@ -81,7 +81,7 @@ export function Products() {
                             /> :
                             <>
                                 <div className="d-flex justify-content-between align-items-center mb-2">
-                                    <div className="d-flex gap-2">
+                                    <div className="d-flex gap-2 flex-column flex-sm-row">
                                         <h2>Artículos</h2>
                                         <Form.Control
                                             placeholder="Buscar por nombre..."
