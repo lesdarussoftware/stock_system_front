@@ -37,8 +37,10 @@ export function useMovements() {
     const [filter, setFilter] = useState<{ page: number; offset: number; }>({ page: 0, offset: 50 });
     const [totalRows, setTotalRows] = useState<number>(0);
 
-    async function getMovements(params?: string | undefined) {
-        const { status, data } = await handleQuery({ url: `${MOVEMENT_URL}${params ? `${params}` : ''}` })
+    async function getMovements(product_id: number, params?: string | undefined) {
+        const { status, data } = await handleQuery({
+            url: `${MOVEMENT_URL}/${product_id}${params ? `${params}` : ''}`
+        })
         if (status === STATUS_CODES.OK) {
             setMovements(data[0]);
             setTotalRows(data[1]);

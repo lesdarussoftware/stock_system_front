@@ -38,7 +38,7 @@ export function MovementsList({ product, setProductShowForm, products, setProduc
     const { formData, setFormData } = movementFormData;
 
     useEffect(() => {
-        getMovements(product.id);
+        getMovements(+product.id);
     }, []);
 
     useEffect(() => {
