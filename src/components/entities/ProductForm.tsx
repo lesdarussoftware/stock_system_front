@@ -28,7 +28,7 @@ export function ProductForm({
 
     return (
         <Form className='mt-4' onChange={handleChange} onSubmit={e => handleSubmit(e)}>
-            <div className='d-flex align-items-end justify-content-between mb-3 gap-5'>
+            <div className='d-flex align-items-end justify-content-between mb-2 mb-md-3'>
                 <Form.Group controlId="name" className={showForm === 'EDIT' ? 'w-75' : 'w-100'}>
                     <Form.Label>Nombre *</Form.Label>
                     <Form.Control name='name' value={formData.name} disabled={showForm === 'VIEW'} />
@@ -49,8 +49,8 @@ export function ProductForm({
                     </Form.Group>
                 }
             </div>
-            <div className='d-flex justify-content-between mb-3 gap-5'>
-                <Form.Group controlId="sku" className='w-50'>
+            <div className='d-flex justify-content-between mb-2 mb-md-3 flex-column flex-md-row gap-3 gap-md-5'>
+                <Form.Group controlId="sku" className='w-100 w-lg-50'>
                     <Form.Label>SKU *</Form.Label>
                     <Form.Control name='sku' value={formData.sku} disabled={showForm === 'VIEW'} />
                     {errors.sku?.type === 'required' &&
@@ -64,7 +64,7 @@ export function ProductForm({
                         </Form.Text>
                     }
                 </Form.Group>
-                <Form.Group controlId="bar_code" className='w-50'>
+                <Form.Group controlId="bar_code" className='w-100 w-lg-50'>
                     <Form.Label>Cód. barras</Form.Label>
                     <Form.Control name='bar_code' value={formData.bar_code} disabled={showForm === 'VIEW'} />
                     {errors.bar_code?.type === 'maxLength' &&
@@ -83,26 +83,26 @@ export function ProductForm({
                     </Form.Text>
                 }
             </Form.Group>
-            <div className='d-flex justify-content-between mb-3 gap-5'>
-                <Form.Group controlId="buy_price" className='w-25'>
+            <div className='d-flex justify-content-between mb-2 mb-md-3 flex-column flex-md-row gap-3 gap-md-5'>
+                <Form.Group controlId="buy_price" className='w-100 w-md-25'>
                     <Form.Label>Precio compra</Form.Label>
                     <Form.Control type='number' min={0} step="0.01" name='buy_price' value={formData.buy_price} disabled={showForm === 'VIEW'} />
                 </Form.Group>
-                <Form.Group controlId="earn" className='w-25'>
+                <Form.Group controlId="earn" className='w-100 w-md-25'>
                     <Form.Label>% Ganancia</Form.Label>
                     <Form.Control type='number' min={0} max={100} name='earn' value={formData.earn} disabled={showForm === 'VIEW'} />
                 </Form.Group>
-                <Form.Group controlId="sale_price" className='w-25'>
+                <Form.Group controlId="sale_price" className='w-100 w-md-25'>
                     <Form.Label>Precio venta</Form.Label>
                     <Form.Control type='number' min={0} step="0.01" name='sale_price' value={formData.sale_price} disabled={showForm === 'VIEW'} />
                 </Form.Group>
-                <Form.Group controlId="min_stock" className='w-25'>
+                <Form.Group controlId="min_stock" className='w-100 w-md-25'>
                     <Form.Label>Stock mínimo</Form.Label>
                     <Form.Control type='number' min={0} step="1" name='min_stock' value={formData.min_stock} disabled={showForm === 'VIEW'} />
                 </Form.Group>
             </div>
-            <div className='d-flex justify-content-between mb-3'>
-                <Form.Group controlId="category_id" className='w-25'>
+            <div className='d-flex justify-content-between mb-3 flex-column flex-md-row gap-3 gap-md-5'>
+                <Form.Group controlId="category_id" className='w-100 w-md-25'>
                     <Form.Label>Categoría *</Form.Label>
                     <Form.Select name='category_id' value={formData.category_id} disabled={showForm === 'VIEW'}>
                         <option value="">Seleccione</option>
@@ -114,7 +114,7 @@ export function ProductForm({
                         </Form.Text>
                     }
                 </Form.Group>
-                <Form.Group controlId="supplier_id" className='w-25'>
+                <Form.Group controlId="supplier_id" className='w-100 w-md-25'>
                     <Form.Label>Proveedor *</Form.Label>
                     <Form.Select name='supplier_id' value={formData.supplier_id} disabled={showForm === 'VIEW'}>
                         <option value="">Seleccione</option>
@@ -126,7 +126,7 @@ export function ProductForm({
                         </Form.Text>
                     }
                 </Form.Group>
-                <Form.Group controlId="store_id" className='w-25'>
+                <Form.Group controlId="store_id" className='w-100 w-md-25'>
                     <Form.Label>Depósito</Form.Label>
                     <Form.Select name='store_id' value={formData.store_id} disabled={showForm === 'VIEW'}>
                         <option value="">Seleccione</option>

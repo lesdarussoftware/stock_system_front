@@ -74,64 +74,66 @@ export function CommercialTable({
                     />
                 }
             </div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Stock</th>
-                        <th>Cantidad</th>
-                        <th>Total det.</th>
-                        {(showForm === 'NEW' || showForm === 'EDIT') && <th />}
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.length === 0 ?
+            <div className="table-responsive">
+                <Table striped bordered hover>
+                    <thead>
                         <tr>
-                            <td colSpan={5} className='text-center'>
-                                No hay registros para mostrar.
-                            </td>
-                        </tr> :
-                        items.map((item: any, idx: number) => {
-                            const product: any = products.find(p => +p.id === +item.product_id)!;
-                            return (
-                                <tr key={idx}>
-                                    <td>{idx + 1}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.stock}</td>
-                                    <td>
-                                        <Form.Control
-                                            type='number'
-                                            min={1}
-                                            step={1}
-                                            name='amount'
-                                            value={+item.amount}
-                                            disabled={showForm === 'VIEW'}
-                                            onChange={(e: any) => handleChangeAmount(e.target.value, product.id)}
-                                        />
-                                    </td>
-                                    <td>
-                                        {type === 'PURCHASE' ?
-                                            `$${(+item.product_buy_price * +item.amount).toFixed(2)}` :
-                                            `$${(getItemSalePrice(item) * +item.amount).toFixed(2)}`}
-                                    </td>
-                                    {(showForm === 'NEW' || showForm === 'EDIT') &&
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Stock</th>
+                            <th>Cantidad</th>
+                            <th>Total det.</th>
+                            {(showForm === 'NEW' || showForm === 'EDIT') && <th />}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {items.length === 0 ?
+                            <tr>
+                                <td colSpan={5} className='text-center'>
+                                    No hay registros para mostrar.
+                                </td>
+                            </tr> :
+                            items.map((item: any, idx: number) => {
+                                const product: any = products.find(p => +p.id === +item.product_id)!;
+                                return (
+                                    <tr key={idx}>
+                                        <td>{idx + 1}</td>
+                                        <td>{product.name}</td>
+                                        <td>{product.stock}</td>
                                         <td>
-                                            <button
-                                                type="button"
-                                                className="btn btn-danger btn-sm d-flex align-items-center"
-                                                onClick={() => handleDelete(showForm === 'NEW' ? product.id : item.id)}
-                                            >
-                                                <DeleteIcon />
-                                            </button>
+                                            <Form.Control
+                                                type='number'
+                                                min={1}
+                                                step={1}
+                                                name='amount'
+                                                value={+item.amount}
+                                                disabled={showForm === 'VIEW'}
+                                                onChange={(e: any) => handleChangeAmount(e.target.value, product.id)}
+                                            />
                                         </td>
-                                    }
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </Table>
+                                        <td>
+                                            {type === 'PURCHASE' ?
+                                                `$${(+item.product_buy_price * +item.amount).toFixed(2)}` :
+                                                `$${(getItemSalePrice(item) * +item.amount).toFixed(2)}`}
+                                        </td>
+                                        {(showForm === 'NEW' || showForm === 'EDIT') &&
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-danger btn-sm d-flex align-items-center"
+                                                    onClick={() => handleDelete(showForm === 'NEW' ? product.id : item.id)}
+                                                >
+                                                    <DeleteIcon />
+                                                </button>
+                                            </td>
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </Table>
+            </div>
         </>
     );
 }
