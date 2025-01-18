@@ -6,7 +6,6 @@ export interface AuthData {
     me: {
         id: number;
         username: string;
-        deadline: string;
     }
 }
 

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
@@ -19,7 +18,6 @@ export function BuyPaymentsList({ buyOrder, setBuyOrderShowForm }: BuyPaymentsLi
 
     const {
         buyPayments,
-        getBuyPayments,
         buyPaymentFormData,
         showForm,
         setShowForm,
@@ -33,10 +31,6 @@ export function BuyPaymentsList({ buyOrder, setBuyOrderShowForm }: BuyPaymentsLi
         deleteBuyPayment
     } = useBuyPayments();
     const { formData, setFormData } = buyPaymentFormData;
-
-    useEffect(() => {
-        getBuyPayments(buyOrder.id);
-    }, []);
 
     return (
         <>

@@ -1,9 +1,9 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-import { AuthContext } from "../../contexts/AuthContext";
+// import { AuthContext } from "../../contexts/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
 
 type LayoutProps = {
@@ -12,7 +12,7 @@ type LayoutProps = {
 
 export function Layout({ children }: LayoutProps) {
 
-    const { auth } = useContext(AuthContext);
+    // const { auth } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export function Layout({ children }: LayoutProps) {
             <header>
                 <Navbar bg="primary" className="d-flex justify-content-between px-3" expand="lg">
                     <Navbar.Brand className="text-white d-flex align-items-center">
-                        Venc.: {auth?.me.deadline.split('T')[0].split('-').reverse().join('/')}
+                        Venc.: 
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbar-responsive" className="border-0 bg-white" />
                     <Navbar.Collapse id="navbar-responsive">

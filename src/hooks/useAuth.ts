@@ -38,7 +38,7 @@ export function useAuth() {
                     setBodyMessage('Credenciales inválidas.');
                     setOpenMessage(true);
                 } else {
-                    reset(setShowForm);
+                    reset();
                     setAuth(data);
                     setSessionExpired(false)
                     localStorage.setItem('stock_system_auth', JSON.stringify(data));
