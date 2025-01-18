@@ -14,7 +14,7 @@ import { Users } from './pages/Users'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/app1'>
       <AuthProvider>
         <MessageProvider>
           <Routes>
