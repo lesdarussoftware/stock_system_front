@@ -14,7 +14,7 @@ import { Users } from './pages/Users'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/stock/'>
       <AuthProvider>
         <MessageProvider>
           <Routes>
