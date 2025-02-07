@@ -16,3 +16,4 @@ export const MOVEMENT_URL = `${BASE_URL}/movements`;
 export const LOGIN_URL = `${BASE_URL}/auth/login`;
 export const LOGOUT_URL = `${BASE_URL}/auth/logout`;
 export const REFRESH_URL = BASE_URL + '/auth/refresh'
+export const ASSISTANT_URL = BASE_URL + '/assistant'
