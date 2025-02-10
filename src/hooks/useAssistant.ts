@@ -47,10 +47,16 @@ export function useAssistant() {
         };
     }
 
-    function extractThinkContent(text: string) {
+    function splitMessage(text: string) {
         const match = text.match(/<think>(.*?)<\/think>/s);
-        return match ? match[1].trim() : null;
+        if (match) {
+            return {
+                thinkContent: match[1].trim(),
+                restOfText: text.replace(match[0], "").trim()
+            };
+        }
+        return { thinkContent: null, restOfText: text.trim() };
     }
 
-    return { chat, messages, setMessages, partialResponse, extractThinkContent };
+    return { chat, messages, setMessages, partialResponse, splitMessage };
 }
