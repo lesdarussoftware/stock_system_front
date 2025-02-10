@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 
 export function ChatWithAssistant() {
 
-    const { chat, messages, toggleThought } = useAssistant();
+    const { chat, messages } = useAssistant();
 
     const { formData, reset, handleChange } = useForm({
         defaultData: { input: "" },
@@ -36,20 +36,8 @@ export function ChatWithAssistant() {
                     <ListGroup className="mb-3 overflow-auto" style={{ maxHeight: "300px" }}>
                         {messages.map((msg, index) => {
                             return (
-                                <ListGroup.Item key={index} className={msg.model !== 'user' ? "" : "text-end"}>
-                                    <strong>{msg.model !== 'user' ? "Asistente" : "Tú"}:</strong> {msg.response}
-                                    {msg.thought && (
-                                        <div>
-                                            <Button
-                                                variant="link"
-                                                size="sm"
-                                                onClick={() => toggleThought(index)}
-                                            >
-                                                {msg.showThought ? "Ocultar Pensamiento" : "Mostrar Pensamiento"}
-                                            </Button>
-                                            {msg.showThought && <p className="text-muted">{msg.thought}</p>}
-                                        </div>
-                                    )}
+                                <ListGroup.Item key={index} className={msg.type !== 'user' ? "" : "text-end"}>
+                                    <strong>{msg.type !== 'user' ? "Asistente" : "Tú"}:</strong> {msg.response}
                                 </ListGroup.Item>
                             )
                         })}
